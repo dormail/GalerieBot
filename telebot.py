@@ -8,11 +8,11 @@ from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 
 def handle(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
-    pprint(chat_id)
+    pprint(content_type)
 
     keyboard_person_amount = InlineKeyboardMarkup(inline_keyboard=[
-            [InlineKeyboardButton(text='Button1', callback_data='b1_pressed')],
-            [InlineKeyboardButton(text='Button2', callback_data='b2_pressed')],
+            [InlineKeyboardButton(text='Alleine', callback_data='alone')],
+            [InlineKeyboardButton(text='Zu zweit', callback_data='group')],
         ])
 
     # checking for the correct username
@@ -21,7 +21,12 @@ def handle(msg):
         return
 
     # note: msg['text'] liesst nachricht aus
-    bot.sendMessage(chat_id, 'Willkommen zum GalerieBot, wie lautet der heutige Sicherheitscode?')
+    bot.sendMessage(chat_id, 
+            'Hallo Matthias, bist du alleine oder sollen zwei Plätze reserviert werden?',
+            reply_markup=keyboard_person_amount)
+
+def on_callback_query(msg):
+    query_id, from_id, query_data = telepot.glance(msg, flavor='callback_query')
 
 
 bot = telepot.Bot(TOKEN)
