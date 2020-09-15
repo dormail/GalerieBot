@@ -1,5 +1,5 @@
 ### telebot.py start ###
-from cred import TOKEN
+from cred import TOKEN, correct_chat_id
 import telepot
 import time
 from telepot.loop import MessageLoop
@@ -8,14 +8,21 @@ from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 
 def handle(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
-    pprint(msg['chat']['first_name'] + ' wrote ' + msg['text'])
+    pprint(chat_id)
 
-    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+    keyboard_person_amount = InlineKeyboardMarkup(inline_keyboard=[
             [InlineKeyboardButton(text='Button1', callback_data='b1_pressed')],
             [InlineKeyboardButton(text='Button2', callback_data='b2_pressed')],
         ])
 
-    bot.sendMessage(chat_id, 'What are those buttons', reply_markup=keyboard)
+    # checking for the correct username
+    if chat_id != correct_chat_id:
+        bot.sendMessage(chat_id, 'Bad chat_id')
+        return
+
+    # note: msg['text'] liesst nachricht aus
+    bot.sendMessage(chat_id, 'Willkommen zum GalerieBot, wie lautet der heutige Sicherheitscode?')
+
 
 bot = telepot.Bot(TOKEN)
 MessageLoop(bot, handle).run_as_thread()
