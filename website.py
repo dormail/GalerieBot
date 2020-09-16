@@ -25,7 +25,7 @@ phone_fill = '1774772392'
 code_fill = '1234'
 
 # weitere
-button_class = 'button is-link is-fullwidth is-medium'
+button_class = 'button.is-link.is-fullwidth.is-medium'
 url = 'https://checkin.stwdo.de/mensa/451/checkin'
 
 driver.get(url)
@@ -47,5 +47,10 @@ element = driver.find_element_by_name(phone)
 element.send_keys(phone_fill)
 element = driver.find_element_by_name(code)
 element.send_keys(code_fill)
+
+#element.find_element_by_class_name(button_class).click()
+# using the css selector
+button = driver.find_element_by_css_selector('button.' + button_class)
+button.click()
 
 # website.py end
