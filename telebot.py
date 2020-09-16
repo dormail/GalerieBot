@@ -5,10 +5,12 @@ import time
 from telepot.loop import MessageLoop
 from pprint import pprint
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
+from selenium import webdriver
+from single import single
 
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
-    #pprint(content_type)
+    # pprint(msg)
 
     keyboard_person_amount = InlineKeyboardMarkup(inline_keyboard=[
             [InlineKeyboardButton(text='Alleine', callback_data='alone')],
@@ -22,9 +24,16 @@ def on_chat_message(msg):
 
     ### hier werden generelle chat nachrichten ausgwertet ###
     # note: msg['text'] liesst nachricht aus
-    bot.sendMessage(chat_id, 
+    if msg['text'] == 'Gib Tisch':
+        bot.sendMessage(chat_id, 
             'Hallo Matthias, bist du alleine oder sollen zwei Plätze reserviert werden?',
             reply_markup=keyboard_person_amount)
+
+    if len(msg['text']) == 4:
+        # we are just gonna assume that its a code and that it is correct
+        single(webdriver.Firefox(), msg['text'])
+
+
 
 def on_callback_query(msg):
     print('hi')
