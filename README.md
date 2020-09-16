@@ -1,4 +1,4 @@
-# galerie_reservierung
+# GalerieBot
 Ein Telegrambot, der einem einen Platz in der Galerie gibt
 
 ## Selenium
