@@ -1,13 +1,14 @@
 ### single.py start ###
 from selenium import webdriver
+from guest import guest
 # from selenium import Select
 # from selenium import Keys
 
-def single(driver, security_code):
+def single(driver, guest):
     # firefox als webdriver
     #driver = webdriver.Firefox()
     
-    # namen der auszufuellenden felder
+    # namen der auszufuellenden felder im html code
     first_name = 'first_name'
     last_name = 'last_name'
     street = 'street'
@@ -17,14 +18,27 @@ def single(driver, security_code):
     code = 'security_code'
     
     # werte fuer die Felder
-    first_name_fill = 'Matthias'
-    last_name_fill = 'Maile'
-    street_fill = 'Vogelpothsweg 87'
-    plz_fill = '44227'
-    city_fill = 'Dortmund'
-    phone_fill = '1774772392'
+    # immer ueberpruefen ob diese in der klasse vorhanden sind
+    first_name_fill = guest.first_name
+    last_name_fill = guest.last_name
+    if guest.street != False:
+        street_fill = guest.street
+    else:
+        return "Please set a street"
+    if guest.plz != False:
+        plz_fill = guest.plz
+    else:
+        return "Please set a PLZ"
+    if guest.city != False:
+        city_fill = guest.city
+    else:
+        return "Please set a City"
+    phone_fill = guest.phonenumber
     #code_fill = '1234'
-    code_fill = security_code
+    if guest.code != False:
+        code_fill = guest.code
+    else:
+        return "Please set a code"
     
     # weitere
     button_class = 'button.is-link.is-fullwidth.is-medium'
