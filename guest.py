@@ -1,5 +1,7 @@
 # guest.py start
 # eine Klasse die den Galerie Gast mit seinen Daten abbildet
+from single import single
+from selenium import webdriver
 
 class guest:
     def __init__(self, firstname, lastname):
@@ -14,7 +16,7 @@ class guest:
 
     # setting the code the bot is going to use (each user gets his own code)
     def set_code(self, code):
-        self.sec_code = code
+        self.code = code
 
     # other set methods
     def set_street(self, street):
@@ -34,6 +36,11 @@ class guest:
 
     def print_adress(self):
         print(str(self.street))
+
+    def book_single(self):
+        driver = webdriver.Firefox()
+        self.message = single(driver, self)
+        driver.close()
 
 
 # guest.py end 
