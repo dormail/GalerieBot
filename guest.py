@@ -6,8 +6,16 @@ class guest:
         self.first_name = firstname
         self.lastname = lastname
 
+    # setting the code the bot is going to use (each user gets his own code)
+    def set_code(self, code):
+        self.sec_code = code
 
+    # other set methods
+    def set_street(self, street):
+        self.street = street
 
+    def set_city(self, city):
+        self.city = city
 
 
 # guest.py end 
