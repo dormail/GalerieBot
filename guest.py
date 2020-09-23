@@ -6,7 +6,7 @@ from selenium import webdriver
 class guest:
     def __init__(self, firstname, lastname):
         self.first_name = firstname
-        self.lastname = lastname
+        self.last_name = lastname
         self.code = None
         self.street = None
         self.street_number = None
