@@ -8,6 +8,7 @@ from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 from selenium import webdriver
 from single import single
 
+### setting up the telegram bot with telepot ###
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     # pprint(msg)
@@ -33,15 +34,12 @@ def on_chat_message(msg):
         # we are just gonna assume that its a code and that it is correct
         single(webdriver.Firefox(), msg['text'])
 
-
-
 def on_callback_query(msg):
     print('hi')
     query_id, from_id, query_data = telepot.glance(msg, flavor='callback_query')
 
     ### hier kann die antwort mit Buttons ausgewertet werden ###
     bot.answerCallbackQuery(query_id, text='Ok')
-
 
 bot = telepot.Bot(TOKEN)
 MessageLoop(bot, {'chat': on_chat_message,
