@@ -7,6 +7,14 @@ from pprint import pprint
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 from selenium import webdriver
 from single import single
+from guest import guest
+
+matthias = guest("Matthias", "Maile")
+matthias.set_street("Eichholzstraße")
+matthias.set_street_number(57)
+matthias.set_city("Dortmund")
+matthias.set_plz(44289)
+matthias.set_phonenumber("01774772392")
 
 ### setting up the telegram bot with telepot ###
 def on_chat_message(msg):
@@ -32,7 +40,11 @@ def on_chat_message(msg):
 
     if len(msg['text']) == 4:
         # we are just gonna assume that its a code and that it is correct
-        single(webdriver.Firefox(), msg['text'])
+        print("Booking for one person from " + str(chat_id) + " with the code " + msg['text'])
+        bot.sendMessage(chat_id,
+                'Buche einen Tisch für dich mit dem Code ' + msg['text'])
+        matthias.set_code(msg['text'])
+        single(webdriver.Firefox(), matthias)
 
 def on_callback_query(msg):
     print('hi')
