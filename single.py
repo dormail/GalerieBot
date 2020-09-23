@@ -1,6 +1,5 @@
 ### single.py start ###
 from selenium import webdriver
-from guest import guest
 # from selenium import Select
 # from selenium import Keys
 
@@ -56,5 +55,7 @@ def single(driver, guest):
     # using the css selector
     button = driver.find_element_by_css_selector('button.' + button_class)
     button.click()
+
+    driver.close()
 
 ### single.py end ###
