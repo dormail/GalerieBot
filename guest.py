@@ -7,12 +7,12 @@ class guest:
     def __init__(self, firstname, lastname):
         self.first_name = firstname
         self.lastname = lastname
-        self.code = False
-        self.street = False
-        self.street_number = False
-        self.city = False
-        self.plz = False
-        self.phonenumber = False
+        self.code = None
+        self.street = None
+        self.street_number = None
+        self.city = None
+        self.plz = None
+        self.phonenumber = None
 
     # setting the code the bot is going to use (each user gets his own code)
     def set_code(self, code):

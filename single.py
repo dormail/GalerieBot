@@ -21,24 +21,12 @@ def single(driver, guest):
     # immer ueberpruefen ob diese in der klasse vorhanden sind
     first_name_fill = guest.first_name
     last_name_fill = guest.last_name
-    if guest.street != False:
-        street_fill = guest.street
-    else:
-        return "Please set a street"
-    if guest.plz != False:
-        plz_fill = guest.plz
-    else:
-        return "Please set a PLZ"
-    if guest.city != False:
-        city_fill = guest.city
-    else:
-        return "Please set a City"
+    street_fill = guest.street
+    plz_fill = guest.plz
+    city_fill = guest.city
     phone_fill = guest.phonenumber
     #code_fill = '1234'
-    if guest.code != False:
-        code_fill = guest.code
-    else:
-        return "Please set a code"
+    code_fill = guest.code
     
     # weitere
     button_class = 'button.is-link.is-fullwidth.is-medium'
