@@ -5,9 +5,9 @@ from single import single
 from selenium import webdriver
 
 class guest:
-    def __init__(self, firstname, lastname, chat_id):
-        self.first_name = firstname
-        self.last_name = lastname
+    def __init__(self, chat_id):
+        self.first_name = None
+        self.last_name = None
         self.code = None
         self.street = None
         self.street_number = None
@@ -16,7 +16,13 @@ class guest:
         self.phonenumber = None
         self.chat_id =chat_id
 
-    # setting the code the bot is going to use (each user gets his own code)
+    # setter methods
+    def set_first_name(self, first_name):
+        self.first_name = first_name
+
+    def set_last_name(self, last_name):
+        self.last_name = last_name
+
     def set_code(self, code):
         self.code = code
 
