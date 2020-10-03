@@ -20,51 +20,6 @@ from guest import guest
 # guestList = []
 # guestList.append(matthias)
 
-"""
-### setting up the telegram bot with telepot ###
-def on_chat_message(msg):
-    content_type, chat_type, chat_id = telepot.glance(msg)
-    # pprint(msg)
-
-    keyboard_person_amount = InlineKeyboardMarkup(inline_keyboard=[
-            [InlineKeyboardButton(text='Alleine', callback_data='alone')],
-            [InlineKeyboardButton(text='Zu zweit', callback_data='group')],
-        ])
-
-    # iterate through list of known guests for guest data
-    current_guest = None
-    for potential_guest in guestList:
-        if potential_guest.check_chat_id(chat_id):
-            current_guest = potential_guest
-
-    # if it is a new guest
-    if current_guest == None:
-
-
-
-    ### hier werden generelle chat nachrichten ausgwertet ###
-    # note: msg['text'] liesst nachricht aus
-    if msg['text'] == 'Gib Tisch':
-        bot.sendMessage(chat_id, 
-            'Hallo Matthias, bist du alleine oder sollen zwei Plätze reserviert werden?',
-            reply_markup=keyboard_person_amount)
-
-    if len(msg['text']) == 4:
-        # we are just gonna assume that its a code and that it is correct
-        print("Booking for one person from " + str(chat_id) + " with the code " + msg['text'])
-        bot.sendMessage(chat_id,
-                'Buche einen Tisch für dich mit dem Code ' + msg['text'])
-        matthias.set_code(msg['text'])
-        single(webdriver.Firefox(), matthias)
-
-def on_callback_query(msg):
-    print('hi')
-    query_id, from_id, query_data = telepot.glance(msg, flavor='callback_query')
-
-    ### hier kann die antwort mit Buttons ausgewertet werden ###
-    bot.answerCallbackQuery(query_id, text='Ok')
-"""
-
 class booker(telepot.helper.ChatHandler):
     def __init__(self, *args, **kwargs):
         super(booker, self).__init__(*args, **kwargs)
@@ -110,8 +65,9 @@ bot = telepot.DelegatorBot(TOKEN, [
     pave_event_space()(
         per_chat_id(), create_open, booker, timeout=10),
 ])
+print("Launching GalerieBot")
 MessageLoop(bot).run_as_thread()
-print('Listening...')
+print('Listening to incoming messages...')
 
 while 1:
     time.sleep(10)
