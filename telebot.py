@@ -20,11 +20,12 @@ from guest import guest
 # guestList = []
 # guestList.append(matthias)
 
+# list of all the known guests
+guestList = []
+
 class booker(telepot.helper.ChatHandler):
     def __init__(self, *args, **kwargs):
         super(booker, self).__init__(*args, **kwargs)
-        # the telebot starts with an empty guest list
-        self.guestList = []
 
     def on_chat_message(self, msg):
         content_type, chat_type, chat_id = telepot.glance(msg)
@@ -33,7 +34,7 @@ class booker(telepot.helper.ChatHandler):
 
         # check if guest is on the list
         current_guest = None
-        for person in self.guestList:
+        for person in guestList:
             if person.check_chat_id(chat_id):
                 current_guest = person
                 break # stop iteration when guest is found
@@ -41,7 +42,7 @@ class booker(telepot.helper.ChatHandler):
         # when it is a new guest
         if current_guest is None:  # completely new
             current_guest = guest(chat_id)
-            self.guestList.append(current_guest)
+            guestList.append(current_guest)
             self.sender.sendMessage('What\'s you first name?')
             return
 
