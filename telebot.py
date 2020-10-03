@@ -48,12 +48,15 @@ class booker(telepot.helper.ChatHandler):
 
         if current_guest.state == 10: # new guest, he send his name now
             current_guest.set_first_name(msg['text'])
-            print("New guest " + msg["text"] + " added to guestList")
+            print(
+                str(chat_id) + ":\t" +
+                "New guest " + msg["text"] + " added to guestList"
+            )
             current_guest.set_state(0)  # user is inactive now
             self.sender.sendMessage('Hello ' + current_guest.first_name)
             return
 
-        # checking the commands (adress, name, etc.)
+        # checking the setter commands (adress, name, etc.)
         # since this bot is for a german institution the commands are in German
         if msgtext.startswith('/vorname'):
             new_first_name = msgtext[9:]
@@ -64,7 +67,25 @@ class booker(telepot.helper.ChatHandler):
         if msgtext.startswith('/nachname'):
             new_last_name = msgtext[10:]
             current_guest.set_last_name(new_last_name)
-            self.sender.sendMessage('First name set to ' + new_last_name)
+            self.sender.sendMessage('Last name set to ' + new_last_name)
+            return
+
+        if msgtext.startswith('/strasse'):
+            new_street = msgtext[9:]
+            current_guest.set_street(new_street)
+            self.sender.sendMessage('Street set to ' + new_street)
+            return
+
+        if msgtext.startswith('/hausnummer'):
+            new_hn = msgtext[12:]
+            current_guest.set_street_number(new_hn)
+            self.sender.sendMessage('Housenumber set to ' + new_hn)
+            return
+
+        if msgtext.startswith('/stadt'):
+            new_city = msgtext[7:]
+            current_guest.set_city(new_city)
+            self.sender.sendMessage('City set to ' + new_city)
             return
 
         if msgtext.startswith('/plz'):
@@ -73,6 +94,26 @@ class booker(telepot.helper.ChatHandler):
             self.sender.sendMessage('New PLZ set to ' + new_plz)
             return
 
+        if msgtext.startswith('/info'):
+            print(
+                str(chat_id) + ":\t" +
+                current_guest.first_name + ' ' +
+                ' asked for his info'
+            )
+            message = 'The Information I currently have about you:\n'
+            message = message + current_guest.first_name
+            if current_guest.last_name is not None:
+                message = message + ' ' + current_guest.last_name
+
+            if current_guest.street is not None and current_guest.street_number is not None:
+                message = message + '\n'
+                message = message + current_guest.street + ' ' + \
+                          current_guest.street_number
+
+            self.sender.sendMessage(
+                message
+            )
+            return
 
 
 
