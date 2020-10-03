@@ -4,4 +4,4 @@ from single import single
 driver = webdriver.Firefox()
 code = '1234'
 
-single(driver,code)
+single(driver, code)
