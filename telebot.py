@@ -73,6 +73,7 @@ class booker(telepot.helper.ChatHandler):
 
     def on_chat_message(self, msg):
         content_type, chat_type, chat_id = telepot.glance(msg)
+        msgtext = msg['text']
         # print(chat_id)
 
         # check if guest is on the list
@@ -94,6 +95,15 @@ class booker(telepot.helper.ChatHandler):
             print("New guest " + msg["text"] + " added to guestList")
             current_guest.set_state(0) # user is inactive now
             self.sender.sendMessage('Hello ' + current_guest.first_name)
+            return
+
+        # checking the commands (adress, name, etc.)
+        if msgtext.startswith('/plz'):
+            new_plz = msgtext[5:]
+            current_guest.set_plz(new_plz)
+            self.sender.sendMessage('New PLZ set')
+
+
 
 
 bot = telepot.DelegatorBot(TOKEN, [
