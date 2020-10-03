@@ -1,10 +1,11 @@
 # guest.py start
-# eine Klasse die den Galerie Gast mit seinen Daten abbildet
+# eine Klasse die den Galerie Gast mit den Daten fuer die Reservierung abbildet
+# fuer den Telegram Bot wird die chat_id mit gespeichert
 from single import single
 from selenium import webdriver
 
 class guest:
-    def __init__(self, firstname, lastname):
+    def __init__(self, firstname, lastname, chat_id):
         self.first_name = firstname
         self.last_name = lastname
         self.code = None
@@ -13,6 +14,7 @@ class guest:
         self.city = None
         self.plz = None
         self.phonenumber = None
+        self.chat_id =chat_id
 
     # setting the code the bot is going to use (each user gets his own code)
     def set_code(self, code):
@@ -42,5 +44,12 @@ class guest:
         self.message = single(driver, self)
         driver.close()
 
+    def check_chat_id(self, check_id):
+        # a method which checks if the chat_id from the guest match with
+        # another one
+        if check_id == self.chat_id:
+            return True
+        else:
+            return False
 
 # guest.py end 

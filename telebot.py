@@ -9,7 +9,7 @@ from selenium import webdriver
 from single import single
 from guest import guest
 
-matthias = guest("Matthias", "Maile")
+matthias = guest("Matthias", "Maile", correct_chat_id)
 matthias.set_street("Eichholzstraße")
 matthias.set_street_number(57)
 matthias.set_city("Dortmund")
@@ -27,9 +27,7 @@ def on_chat_message(msg):
         ])
 
     # checking for the correct username
-    if chat_id != correct_chat_id:
-        bot.sendMessage(chat_id, 'Bad chat_id')
-        return
+    # not needed in future since every user has his own chat
 
     ### hier werden generelle chat nachrichten ausgwertet ###
     # note: msg['text'] liesst nachricht aus
