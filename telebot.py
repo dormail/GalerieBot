@@ -39,7 +39,7 @@ class booker(telepot.helper.ChatHandler):
                 break # stop iteration when guest is found
 
         # when it is a new guest
-        if current_guest == None: # completely new
+        if current_guest is None:  # completely new
             current_guest = guest(chat_id)
             self.guestList.append(current_guest)
             self.sender.sendMessage('What\'s you first name?')
@@ -48,15 +48,29 @@ class booker(telepot.helper.ChatHandler):
         if current_guest.state == 10: # new guest, he send his name now
             current_guest.set_first_name(msg['text'])
             print("New guest " + msg["text"] + " added to guestList")
-            current_guest.set_state(0) # user is inactive now
+            current_guest.set_state(0)  # user is inactive now
             self.sender.sendMessage('Hello ' + current_guest.first_name)
             return
 
         # checking the commands (adress, name, etc.)
+        # since this bot is for a german institution the commands are in German
+        if msgtext.startswith('/vorname'):
+            new_first_name = msgtext[9:]
+            current_guest.set_first_name(new_first_name)
+            self.sender.sendMessage('First name set to ' + new_first_name)
+            return
+
+        if msgtext.startswith('/nachname'):
+            new_last_name = msgtext[10:]
+            current_guest.set_last_name(new_last_name)
+            self.sender.sendMessage('First name set to ' + new_last_name)
+            return
+
         if msgtext.startswith('/plz'):
             new_plz = msgtext[5:]
             current_guest.set_plz(new_plz)
-            self.sender.sendMessage('New PLZ set')
+            self.sender.sendMessage('New PLZ set to ' + new_plz)
+            return
 
 
 
@@ -65,7 +79,7 @@ bot = telepot.DelegatorBot(TOKEN, [
     pave_event_space()(
         per_chat_id(), create_open, booker, timeout=10),
 ])
-print("Launching GalerieBot")
+print('Launching GalerieBot')
 MessageLoop(bot).run_as_thread()
 print('Listening to incoming messages...')
 
