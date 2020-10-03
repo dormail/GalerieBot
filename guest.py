@@ -15,8 +15,19 @@ class guest:
         self.plz = None
         self.phonenumber = None
         self.chat_id =chat_id
+        self.state = 10 # new guest, so state = 10
 
     # setter methods
+    def set_state(self, state):
+        """
+        :param state: the new state for the guest
+            state codes:
+             0 - inactive
+             10 - new guest (e.g guest doesnt have a name set)
+        :return: no return value
+        """
+        self.state = state
+
     def set_first_name(self, first_name):
         self.first_name = first_name
 
