@@ -26,8 +26,8 @@ def single(driver, guest):
         last_name_fill = guest.last_name
     else:
         last_name_fill = 'Vorname'
-    if guest.street is not None:
-        street_fill = guest.street
+    if guest.street is not None and guest.house_number is not None:
+        street_fill = guest.street + ' ' + guest.house_number
     else:
         street_fill = 'Vorname'
     if guest.plz is not None:
