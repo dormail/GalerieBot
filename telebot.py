@@ -106,13 +106,11 @@ class Booker(telepot.helper.ChatHandler):
 
             if current_guest.street is not None and current_guest.house_number is not None:
                 message = message + '\n'
-                message = message + current_guest.street + ' ' + \
-                          current_guest.house_number
+                message = message + current_guest.street + ' ' + current_guest.house_number
 
             if current_guest.city is not None and current_guest.plz is not None:
                 message = message + '\n'
-                message = message + current_guest.plz + ' ' + \
-                          current_guest.city
+                message = message + current_guest.plz + ' ' + current_guest.city
 
             self.sender.sendMessage(message)
             return
