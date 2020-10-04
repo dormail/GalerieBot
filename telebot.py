@@ -23,6 +23,7 @@ from guest import guest
 # list of all the known guests
 guestList = []
 
+
 class booker(telepot.helper.ChatHandler):
     def __init__(self, *args, **kwargs):
         super(booker, self).__init__(*args, **kwargs)
@@ -37,7 +38,7 @@ class booker(telepot.helper.ChatHandler):
         for person in guestList:
             if person.check_chat_id(chat_id):
                 current_guest = person
-                break # stop iteration when guest is found
+                break  # stop iteration when guest is found
 
         # when it is a new guest
         if current_guest is None:  # completely new
@@ -46,7 +47,7 @@ class booker(telepot.helper.ChatHandler):
             self.sender.sendMessage('What\'s you first name?')
             return
 
-        if current_guest.state == 10: # new guest, he send his name now
+        if current_guest.state == 10:  # new guest, he send his name now
             current_guest.set_first_name(msg['text'])
             print(
                 str(chat_id) + ":\t" +
@@ -110,11 +111,13 @@ class booker(telepot.helper.ChatHandler):
                 message = message + current_guest.street + ' ' + \
                           current_guest.street_number
 
-            self.sender.sendMessage(
-                message
-            )
-            return
+            if current_guest.city is not None and current_guest.plz is not None:
+                message = message + '\n'
+                message = message + current_guest.plz + ' ' + \
+                          current_guest.city
 
+            self.sender.sendMessage(message)
+            return
 
 
 bot = telepot.DelegatorBot(TOKEN, [
