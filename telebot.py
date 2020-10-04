@@ -22,7 +22,7 @@ class booker(telepot.helper.ChatHandler):
         # print(chat_id)
 
         # check if guest is on the list
-        current_guest = None
+        current_guest: guest = None
         for person in guestList:
             if person.check_chat_id(chat_id):
                 current_guest = person
