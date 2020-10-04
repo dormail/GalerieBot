@@ -1,24 +1,12 @@
 ### telebot.py start ###
-from cred import TOKEN, correct_chat_id
+from cred import TOKEN
 import telepot
 import time
 from telepot.loop import MessageLoop
 from telepot.delegate import per_chat_id, create_open, pave_event_space
-from pprint import pprint
-from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 from selenium import webdriver
 from single import single
 from guest import guest
-
-# matthias = guest("Matthias", "Maile", correct_chat_id)
-# matthias.set_street("Eichholzstraße")
-# matthias.set_street_number(57)
-# matthias.set_city("Dortmund")
-# matthias.set_plz(44289)
-# matthias.set_phonenumber("01774772392")
-#
-# guestList = []
-# guestList.append(matthias)
 
 # list of all the known guests
 guestList = []
@@ -121,7 +109,7 @@ class booker(telepot.helper.ChatHandler):
 
         # booking a seat for your self
         if msgtext.startswith('/alleine'):
-            self.driver.sendMessage('Ok, ich reserviere dir einen Platz')
+            self.sender.sendMessage('Ok, ich reserviere dir einen Platz')
             driver = webdriver.Firefox()
             single(driver, current_guest)
             time.sleep(3)
@@ -141,4 +129,4 @@ print('Listening to incoming messages...')
 while 1:
     time.sleep(10)
 
-### telebot.py end ###
+# telebot.py end #
