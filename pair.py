@@ -3,7 +3,6 @@ booking a chair for two people
 """
 from selenium import webdriver
 
-
 # from selenium import Select
 # from selenium import Keys
 
@@ -57,6 +56,10 @@ def pair(driver, guest1, guest2):
     url = 'https://checkin.stwdo.de/mensa/451/checkin'
 
     driver.get(url)
+
+    # selecting that there are two people
+    button2 = driver.find_elements_by_css_selector('div.control.is-expanded')[1]
+    button2.click()
 
     # we are looking for the items by name
     # first name
