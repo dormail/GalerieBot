@@ -12,9 +12,9 @@ from guest import guest
 guestList = []
 
 
-class booker(telepot.helper.ChatHandler):
+class Booker(telepot.helper.ChatHandler):
     def __init__(self, *args, **kwargs):
-        super(booker, self).__init__(*args, **kwargs)
+        super(Booker, self).__init__(*args, **kwargs)
 
     def on_chat_message(self, msg):
         content_type, chat_type, chat_id = telepot.glance(msg)
@@ -139,7 +139,7 @@ class booker(telepot.helper.ChatHandler):
 
 bot = telepot.DelegatorBot(TOKEN, [
     pave_event_space()(
-        per_chat_id(), create_open, booker, timeout=10),
+        per_chat_id(), create_open, Booker, timeout=10),
 ])
 print('Launching GalerieBot')
 MessageLoop(bot).run_as_thread()
