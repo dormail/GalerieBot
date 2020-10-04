@@ -83,6 +83,16 @@ class booker(telepot.helper.ChatHandler):
             self.sender.sendMessage('New PLZ set to ' + new_plz)
             return
 
+        if msgtext.startswith('/code'):
+            if len(msgtext) != 10:
+                self.sender.sendMessage('Für den Code formatiere deine Nachricht so:\n /code 1234')
+                return
+            tmp = msgtext[6:]
+            current_guest.set_code(tmp)
+            self.sender.sendMessage('Sicherheits-Code geändert')
+            return
+
+        # giving back all the information the bot has about a user
         if msgtext.startswith('/info'):
             print(
                 str(chat_id) + ":\t" +
