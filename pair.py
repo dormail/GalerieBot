@@ -3,9 +3,6 @@ booking a table for two people
 """
 from selenium import webdriver
 
-# from selenium import Select
-# from selenium import Keys
-
 def pair(driver, guest1, guest2):
     # firefox als webdriver
     # driver = webdriver.Firefox()
