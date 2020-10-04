@@ -18,15 +18,36 @@ def single(driver, guest):
     
     # werte fuer die Felder
     # immer ueberpruefen ob diese in der klasse vorhanden sind
-    first_name_fill = guest.first_name
-    last_name_fill = guest.last_name
-    street_fill = guest.street
-    plz_fill = guest.plz
-    city_fill = guest.city
-    phone_fill = guest.phonenumber
+    if guest.first_name is not None:
+        first_name_fill = guest.first_name
+    else:
+        first_name_fill = 'Vorname'
+    if guest.last_name is not None:
+        last_name_fill = guest.last_name
+    else:
+        last_name_fill = 'Vorname'
+    if guest.street is not None:
+        street_fill = guest.street
+    else:
+        street_fill = 'Vorname'
+    if guest.plz is not None:
+        plz_fill = guest.plz
+    else:
+        plz_fill = 'Vorname'
+    if guest.city is not None:
+        city_fill = guest.city
+    else:
+        city_fill = 'Vorname'
+    if guest.phonenumber is not None:
+        phone_fill = guest.phonenumber
+    else:
+        phone_fill = 'Vorname'
     #code_fill = '1234'
-    code_fill = guest.code
-    
+    if guest.code is not None:
+        code_fill = guest.code
+    else:
+        code_fill = 'Vorname'
+
     # weitere
     button_class = 'button.is-link.is-fullwidth.is-medium'
     url = 'https://checkin.stwdo.de/mensa/451/checkin'
