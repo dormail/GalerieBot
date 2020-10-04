@@ -123,6 +123,9 @@ class booker(telepot.helper.ChatHandler):
         if msgtext.startswith('/alleine'):
             driver = webdriver.Firefox()
             single(driver, current_guest)
+            print('Before scrot')
+            driver.save_screenshot("screenshot.png")
+            print('After scrot')
             driver.close()
 
 
