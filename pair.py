@@ -1,12 +1,15 @@
-### single.py start ###
+""" pair.py start
+booking a table for two people
+"""
 from selenium import webdriver
+
 # from selenium import Select
 # from selenium import Keys
 
-def single(driver, guest):
+def pair(driver, guest1, guest2):
     # firefox als webdriver
-    #driver = webdriver.Firefox()
-    
+    # driver = webdriver.Firefox()
+
     # namen der auszufuellenden felder im html code
     first_name = 'first_name'
     last_name = 'last_name'
@@ -15,45 +18,49 @@ def single(driver, guest):
     city = 'city'
     phone = 'phone'
     code = 'security_code'
-    
+
     # werte fuer die Felder
-    # immer ueberpruefen ob diese beim Gast vorhanden sind
-    if guest.first_name is not None:
-        first_name_fill = guest.first_name
+    # immer ueberpruefen ob diese in der klasse vorhanden sind
+    if guest1.first_name is not None:
+        first_name_fill = guest1.first_name
     else:
         first_name_fill = 'Vorname'
-    if guest.last_name is not None:
-        last_name_fill = guest.last_name
+    if guest1.last_name is not None:
+        last_name_fill = guest1.last_name
     else:
         last_name_fill = 'Vorname'
-    if guest.street is not None and guest.house_number is not None:
-        street_fill = guest.street + ' ' + guest.house_number
+    if guest1.street is not None:
+        street_fill = guest1.street
     else:
-        street_fill = 'Musterstraße 007'
-    if guest.plz is not None:
-        plz_fill = guest.plz
+        street_fill = 'Vorname'
+    if guest1.plz is not None:
+        plz_fill = guest1.plz
     else:
         plz_fill = 'Vorname'
-    if guest.city is not None:
-        city_fill = guest.city
+    if guest1.city is not None:
+        city_fill = guest1.city
     else:
         city_fill = 'city'
-    if guest.phonenumber is not None:
-        phone_fill = guest.phonenumber
+    if guest1.phonenumber is not None:
+        phone_fill = guest1.phonenumber
     else:
         phone_fill = '231444444'
-    #code_fill = '1234'
-    if guest.code is not None:
-        code_fill = guest.code
+    # code_fill = '1234'
+    if guest1.code is not None:
+        code_fill = guest1.code
     else:
         code_fill = '1234'
 
     # weitere
     button_class = 'button.is-link.is-fullwidth.is-medium'
     url = 'https://checkin.stwdo.de/mensa/451/checkin'
-    
+
     driver.get(url)
-    
+
+    # selecting that there are two people
+    button2 = driver.find_elements_by_css_selector('div.control.is-expanded')[1]
+    button2.click()
+
     # we are looking for the items by name
     # first name
     element = driver.find_element_by_name(first_name)
@@ -71,8 +78,8 @@ def single(driver, guest):
     element.send_keys(phone_fill)
     element = driver.find_element_by_name(code)
     element.send_keys(code_fill)
-    
-    #element.find_element_by_class_name(button_class).click()
+
+    # element.find_element_by_class_name(button_class).click()
     # using the css selector
     button = driver.find_element_by_css_selector('button.' + button_class)
     button.click()

@@ -67,7 +67,7 @@ class booker(telepot.helper.ChatHandler):
 
         if msgtext.startswith('/hausnummer'):
             new_hn = msgtext[12:]
-            current_guest.set_street_number(new_hn)
+            current_guest.set_house_number(new_hn)
             self.sender.sendMessage('Housenumber set to ' + new_hn)
             return
 
@@ -94,10 +94,10 @@ class booker(telepot.helper.ChatHandler):
             if current_guest.last_name is not None:
                 message = message + ' ' + current_guest.last_name
 
-            if current_guest.street is not None and current_guest.street_number is not None:
+            if current_guest.street is not None and current_guest.house_number is not None:
                 message = message + '\n'
                 message = message + current_guest.street + ' ' + \
-                          current_guest.street_number
+                          current_guest.house_number
 
             if current_guest.city is not None and current_guest.plz is not None:
                 message = message + '\n'
@@ -116,6 +116,15 @@ class booker(telepot.helper.ChatHandler):
             driver.save_screenshot('screenshot.png')
             self.sender.sendPhoto(open('screenshot.png', 'rb'))
             driver.close()
+            return
+
+        # booking a chair for 2 people
+        if msgtext.startswith('/zwei'):
+            self.sender.sendMessage('Function not implemented yet!')
+            return
+
+        # when he did not understand
+        self.sender.sendMessage('Das habe ich nicht verstanden.')
 
 
 bot = telepot.DelegatorBot(TOKEN, [

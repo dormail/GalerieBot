@@ -10,7 +10,7 @@ class guest:
         self.last_name = None
         self.code = None
         self.street = None
-        self.street_number = None
+        self.house_number = None
         self.city = None
         self.plz = None
         self.phonenumber = None
@@ -41,8 +41,8 @@ class guest:
     def set_street(self, street):
         self.street = street
 
-    def set_street_number(self, street_number):
-        self.street_number = street_number
+    def set_house_number(self, street_number):
+        self.house_number = street_number
 
     def set_city(self, city):
         self.city = city
