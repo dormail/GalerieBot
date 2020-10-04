@@ -37,16 +37,16 @@ def single(driver, guest):
     if guest.city is not None:
         city_fill = guest.city
     else:
-        city_fill = 'Vorname'
+        city_fill = 'city'
     if guest.phonenumber is not None:
         phone_fill = guest.phonenumber
     else:
-        phone_fill = 'Vorname'
+        phone_fill = '231444444'
     #code_fill = '1234'
     if guest.code is not None:
         code_fill = guest.code
     else:
-        code_fill = 'Vorname'
+        code_fill = '1234'
 
     # weitere
     button_class = 'button.is-link.is-fullwidth.is-medium'
