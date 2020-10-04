@@ -121,11 +121,12 @@ class booker(telepot.helper.ChatHandler):
 
         # booking a seat for your self
         if msgtext.startswith('/alleine'):
+            self.driver.sendMessage('Ok, ich reserviere dir einen Platz')
             driver = webdriver.Firefox()
             single(driver, current_guest)
-            print('Before scrot')
-            driver.save_screenshot("screenshot.png")
-            print('After scrot')
+            time.sleep(3)
+            driver.save_screenshot('screenshot.png')
+            self.sender.sendPhoto(open('screenshot.png', 'rb'))
             driver.close()
 
 
