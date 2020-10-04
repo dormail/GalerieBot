@@ -119,6 +119,12 @@ class booker(telepot.helper.ChatHandler):
             self.sender.sendMessage(message)
             return
 
+        # booking a seat for your self
+        if msgtext.startswith('/alleine'):
+            driver = webdriver.Firefox()
+            single(driver, current_guest)
+            driver.close()
+
 
 bot = telepot.DelegatorBot(TOKEN, [
     pave_event_space()(
