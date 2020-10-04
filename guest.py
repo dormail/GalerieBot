@@ -4,7 +4,7 @@
 from single import single
 from selenium import webdriver
 
-class guest:
+class Guest:
     def __init__(self, chat_id):
         self.first_name = None
         self.last_name = None

@@ -6,7 +6,7 @@ from telepot.loop import MessageLoop
 from telepot.delegate import per_chat_id, create_open, pave_event_space
 from selenium import webdriver
 from single import single
-from guest import guest
+from guest import Guest
 
 # list of all the known guests
 guestList = []
@@ -22,7 +22,7 @@ class Booker(telepot.helper.ChatHandler):
         # print(chat_id)
 
         # check if guest is on the list
-        current_guest: guest = None
+        current_guest: Guest = None
         for person in guestList:
             if person.check_chat_id(chat_id):
                 current_guest = person
@@ -30,7 +30,7 @@ class Booker(telepot.helper.ChatHandler):
 
         # when it is a new guest
         if current_guest is None:  # completely new
-            current_guest = guest(chat_id)
+            current_guest = Guest(chat_id)
             guestList.append(current_guest)
             self.sender.sendMessage('What\'s you first name?')
             return

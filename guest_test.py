@@ -1,13 +1,13 @@
 # testing script for the guest class
 from cred import TOKEN, correct_chat_id
-from guest import guest
+from guest import Guest
 
-max = guest(1)
+max = Guest(1)
 max.set_first_name('max')
-peter = guest(2)
+peter = Guest(2)
 peter.set_first_name('peter')
 peter.set_last_name('furlan')
-tom = guest(213)
+tom = Guest(213)
 tom.set_first_name('tom')
 
 guestList = []
