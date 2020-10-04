@@ -1,5 +1,5 @@
 """ pair.py start
-booking a chair for two people
+booking a table for two people
 """
 from selenium import webdriver
 
