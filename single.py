@@ -56,6 +56,4 @@ def single(driver, guest):
     button = driver.find_element_by_css_selector('button.' + button_class)
     button.click()
 
-    driver.close()
-
 ### single.py end ###
