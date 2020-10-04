@@ -17,7 +17,7 @@ def single(driver, guest):
     code = 'security_code'
     
     # werte fuer die Felder
-    # immer ueberpruefen ob diese in der klasse vorhanden sind
+    # immer ueberpruefen ob diese beim Gast vorhanden sind
     if guest.first_name is not None:
         first_name_fill = guest.first_name
     else:
@@ -26,10 +26,10 @@ def single(driver, guest):
         last_name_fill = guest.last_name
     else:
         last_name_fill = 'Vorname'
-    if guest.street is not None:
-        street_fill = guest.street
+    if guest.street is not None and guest.house_number is not None:
+        street_fill = guest.street + ' ' + guest.house_number
     else:
-        street_fill = 'Vorname'
+        street_fill = 'Musterstraße 007'
     if guest.plz is not None:
         plz_fill = guest.plz
     else:
