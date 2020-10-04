@@ -116,6 +116,15 @@ class booker(telepot.helper.ChatHandler):
             driver.save_screenshot('screenshot.png')
             self.sender.sendPhoto(open('screenshot.png', 'rb'))
             driver.close()
+            return
+
+        # booking a chair for 2 people
+        if msgtext.startswith('/zwei'):
+            self.sender.sendMessage('Function not implemented yet!')
+            return
+
+        # when he did not understand
+        self.sender.sendMessage('Das habe ich nicht verstanden.')
 
 
 bot = telepot.DelegatorBot(TOKEN, [
