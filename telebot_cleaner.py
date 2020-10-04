@@ -3,7 +3,7 @@ a python script which opens a telegram bot session so all messages are marked
 as read
 """
 import time
-from cred import TOKEN, correct_chat_id
+from cred import TOKEN
 import telepot
 from telepot.loop import MessageLoop
 from telepot.delegate import per_chat_id, create_open, pave_event_space
