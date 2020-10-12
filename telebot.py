@@ -7,6 +7,17 @@ from telepot.delegate import per_chat_id, create_open, pave_event_space
 from selenium import webdriver
 from single import single
 from guest import guest
+import sqlite3
+
+conn = sqlite3.connect('guests.db')
+
+c = conn.cursor()
+
+c.execute('''CREATE TABLE guests(first_name text, last_name text)''')
+c.execute("INSERT INTO guests VALUES ('Matthias','Maile')")
+
+conn.commit()
+conn.close()
 
 # list of all the known guests
 guestList = []
