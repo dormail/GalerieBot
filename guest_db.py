@@ -11,9 +11,10 @@ c = conn.cursor()
 c.execute('''DROP TABLE guests''')
 
 c.execute('''CREATE TABLE guests
-                (first_name text, last_name text, code INTEGER, 
-                street text, house_number INTEGER, plz INTEGER, 
-                phonenumber INTEGER, chat_id BIGINT, state INTEGER)''')
+                (first_name , last_name , code , 
+                street , house_number , plz , 
+                phonenumber , chat_id , state )''')
 
 conn.commit()
 conn.close()
+print("Resetting database successfull")
