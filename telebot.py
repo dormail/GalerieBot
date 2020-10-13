@@ -9,15 +9,6 @@ from single import single
 from guest import guest
 import sqlite3
 
-conn = sqlite3.connect('guests.db')
-
-c = conn.cursor()
-
-c.execute('''CREATE TABLE guests(first_name text, last_name text)''')
-c.execute("INSERT INTO guests VALUES ('Matthias','Maile')")
-
-conn.commit()
-conn.close()
 
 # list of all the known guests
 guestList = []
@@ -28,6 +19,10 @@ class booker(telepot.helper.ChatHandler):
         super(booker, self).__init__(*args, **kwargs)
 
     def on_chat_message(self, msg):
+        # db stuff
+        conn = sqlite3.connect('guests.db')
+        c = conn.cursor()
+
         content_type, chat_type, chat_id = telepot.glance(msg)
         msgtext = msg['text']
         # print(chat_id)
@@ -38,6 +33,17 @@ class booker(telepot.helper.ChatHandler):
             if person.check_chat_id(chat_id):
                 current_guest = person
                 break  # stop iteration when guest is found
+
+        c.execute("select * from guests where chat_id=:ins", {"ins": chat_id})
+
+        # when no guest with matching chat_id was found
+        if c.fetchone() is None:
+            print(str(chat_id))
+            c.execute('insert into guests values (\'None\', \'None\', 0000, \'None\', 0, 0, 0, ?, 10)', (chat_id))
+            print('Guest added to SQlite db')
+            conn.commit()
+            conn.close()
+        #current_chat_id =
 
         # when it is a new guest
         if current_guest is None:  # completely new
