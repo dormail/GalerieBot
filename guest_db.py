@@ -11,7 +11,9 @@ c = conn.cursor()
 c.execute('''DROP TABLE guests''')
 
 c.execute('''CREATE TABLE guests
-                (first_name text, last_name text, code INTEGER, street text, house_number INTEGER, plz INTEGER, phonenumber INTEGER, chat_id BIGINT)''')
+                (first_name text, last_name text, code INTEGER, 
+                street text, house_number INTEGER, plz INTEGER, 
+                phonenumber INTEGER, chat_id BIGINT, state INTEGER)''')
 
 conn.commit()
 conn.close()
